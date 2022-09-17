@@ -1,0 +1,28 @@
+<div class="modal-footer">
+  <form>
+    <div class="form-group">
+      <input type="date" id="startDate" name="startDate" value="2022-09-12" #startDate>
+    </div>
+    <div class="form-group">
+      <input type="date" id="endDate" name="endDate" value="2022-09-18" #endDate>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" (click)="getData(startDate.value, endDate.value)">submit</button>
+    </div>
+  </form>
+  <p></p>
+  <table *ngIf="show">
+    <tr>
+      <th>Day</th>
+      <th>Bid</th>
+      <th>Ask</th>
+      <th>Diff</th>
+    </tr>
+    <tr *ngFor="let currency of currencyArray">
+      <td >{{currency.dayDate}}</td>
+      <td>{{currency.bidValue}}</td>
+      <td>{{currency.askValue}}</td>
+      <td>{{currency.bidAskDifference}}</td>
+    </tr>
+  </table>
+</div>
