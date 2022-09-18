@@ -7,6 +7,7 @@ Simple web appliaction that displays a dynamic table of data of USD currency fro
 Backend libraries:
 - Spring Boot
 - Lombok
+- JUnit
 
 Frontend libraries:
 - Angular
