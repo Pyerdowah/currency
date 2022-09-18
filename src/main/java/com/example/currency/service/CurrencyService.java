@@ -32,14 +32,18 @@ public class CurrencyService {
         List<CurrencyResponseDto> currencyResponseDtoList = new ArrayList<>();
         for (long i = 0; i < dateService.getCounter(); i++) {
             String bankApiUrlWithDates = getApiUrlWithDates(localStartDate.plusDays(maxDaysDataRange * i), localStartDate.plusDays(maxDaysDataRange * (i + 1) - 1));
-            if (!addDataToResponseList(bankApiUrlWithDates, currencyResponseDtoList)) {
+            Object data = getObjectInfoFromApi(bankApiUrlWithDates);
+            if (checkApiRequest(data)) {
                 return new ResponseEntity<>("wrong data range", HttpStatus.BAD_REQUEST);
             }
+            addDataToResponseList(currencyResponseDtoList, data);
         }
         String bankApiUrlWithDates = getApiUrlWithDates(localEndDate.minusDays(dateService.getRest()), localEndDate);
-        if(!addDataToResponseList(bankApiUrlWithDates, currencyResponseDtoList)) {
+        Object data = getObjectInfoFromApi(bankApiUrlWithDates);
+        if (checkApiRequest(data)) {
             return new ResponseEntity<>("wrong data range", HttpStatus.BAD_REQUEST);
         }
+        addDataToResponseList(currencyResponseDtoList, data);
         return new ResponseEntity<>(currencyResponseDtoList, HttpStatus.OK);
     }
 
@@ -47,15 +51,14 @@ public class CurrencyService {
         return bankApiUrl + start + "/" + end + "/" + "?format=json";
     }
 
-    private boolean addDataToResponseList(String bankApiUrlWithDates, List<CurrencyResponseDto> currencyResponseDtoList){
-        Object data = getObjectInfoFromApi(bankApiUrlWithDates);
-        if (Objects.equals(data.toString(), "400 BAD_REQUEST")) {
-            return false;
-        }
+    private boolean checkApiRequest(Object data) {
+        return Objects.equals(data.toString(), "400 BAD_REQUEST");
+    }
+
+    private void addDataToResponseList(List<CurrencyResponseDto> currencyResponseDtoList, Object data) {
         for (Currency currency : Objects.requireNonNull(getCurrencyArrayFromJson((JSONObject) data))) {
             currencyResponseDtoList.add(CurrencyMapper.objectToResponseDto(currency));
         }
-        return true;
     }
 
     private Object getObjectInfoFromApi(String url) throws HttpClientErrorException {

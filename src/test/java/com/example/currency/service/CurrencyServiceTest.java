@@ -38,23 +38,33 @@ public class CurrencyServiceTest {
 
         CurrencyService currencyService = new CurrencyService();
 
+        //when
         ResponseEntity<?> responseEntity = currencyService.splitData(startDateArray[0], endDateArray[0]);
+        //then
         assertEquals(responseEntity.getStatusCode(), HttpStatus.NOT_FOUND);
         assertEquals(responseEntity.getBody(), "no data in this time");
 
+        //when
         ResponseEntity<?> responseEntity1 = currencyService.splitData(startDateArray[1], endDateArray[1]);
+        //then
         assertEquals(responseEntity1.getStatusCode(), HttpStatus.NOT_FOUND);
         assertEquals(responseEntity1.getBody(), "no data in this time");
 
+        //when
         ResponseEntity<?> responseEntity2 = currencyService.splitData(startDateArray[2], endDateArray[2]);
+        //then
         assertEquals(responseEntity2.getStatusCode(), HttpStatus.OK);
         assertEquals(Objects.requireNonNull(responseEntity2.getBody()).toString(), currencyResponseDtoList.toString());
 
+        //when
         ResponseEntity<?> responseEntity3 = currencyService.splitData(startDateArray[3], endDateArray[3]);
+        //then
         assertEquals(responseEntity3.getStatusCode(), HttpStatus.BAD_REQUEST);
         assertEquals(responseEntity3.getBody(), "wrong data range");
 
+        //when
         ResponseEntity<?> responseEntity4 = currencyService.splitData(startDateArray[4], endDateArray[4]);
+        //then
         assertEquals(responseEntity4.getStatusCode(), HttpStatus.OK);
         assertEquals(Objects.requireNonNull(responseEntity4.getBody()).toString(), currencyResponseDtoList.toString());
     }
