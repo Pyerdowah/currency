@@ -1,5 +1,6 @@
 package com.example.currency.service;
 
+import com.example.currency.Constants;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -44,7 +45,7 @@ public class DateServiceTest {
         assertEquals(dateService.getCounter(), 0L);
         assertEquals(dateService.getRest(), 7L);
 
-        assertEquals(dateService1.getLocalStartDate(), dateService1.getAvailableDataFirstDay());
+        assertEquals(dateService1.getLocalStartDate(), Constants.availableDataFirstDay);
         assertEquals(dateService1.getLocalEndDate(), LocalDate.parse(endDateArray[1]));
         assertEquals(dateService1.getToday(), LocalDate.now());
         assertFalse(dateService1.getIsDataAvailable());
@@ -72,11 +73,11 @@ public class DateServiceTest {
         assertEquals(dateService4.getLocalEndDate(), dateService4.getToday());
         assertEquals(dateService4.getToday(), LocalDate.now());
         assertTrue(dateService4.getIsDataAvailable());
-        assertEquals(dateService4.getDaysBetweenStartAndEnd(), -358L);
+        assertEquals(dateService4.getDaysBetweenStartAndEnd(), -357L);
         assertEquals(dateService4.getCounter(), 0L);
-        assertEquals(dateService4.getRest(), -358L);
+        assertEquals(dateService4.getRest(), -357L);
 
-        assertEquals(dateService5.getLocalStartDate(), dateService5.getAvailableDataFirstDay());
+        assertEquals(dateService5.getLocalStartDate(), Constants.availableDataFirstDay);
         assertEquals(dateService5.getLocalEndDate(), LocalDate.parse(endDateArray[5]));
         assertEquals(dateService5.getToday(), LocalDate.now());
         assertTrue(dateService5.getIsDataAvailable());
@@ -132,5 +133,17 @@ public class DateServiceTest {
             //then
             assertTrue(dateService.isDataOnlyFromWeekend());
         }
+    }
+
+    @Test
+    public void only_today_data_to_true() {
+        DateService dateService = new DateService("2022-09-19", "2022-09-19");
+        assertTrue(dateService.onlyTodayData());
+    }
+
+    @Test
+    public void only_today_data_to_false() {
+        DateService dateService = new DateService("2020-09-19", "2022-09-19");
+        assertFalse(dateService.onlyTodayData());
     }
 }

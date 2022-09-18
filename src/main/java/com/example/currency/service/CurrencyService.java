@@ -29,6 +29,13 @@ public class CurrencyService {
         if (dateService.getIsDataAvailable() || dateService.isDataOnlyFromWeekend()) {
             return new ResponseEntity<>("no data in this time", HttpStatus.NOT_FOUND);
         }
+        if (dateService.onlyTodayData()) {
+            String bankApiUrlWithDates = getApiUrlWithDates(localStartDate, localStartDate);
+            Object data = getObjectInfoFromApi(bankApiUrlWithDates);
+            if (checkApiRequest(data)) {
+                return new ResponseEntity<>("no data in this time", HttpStatus.NOT_FOUND);
+            }
+        }
         List<CurrencyResponseDto> currencyResponseDtoList = new ArrayList<>();
         for (long i = 0; i < dateService.getCounter(); i++) {
             String bankApiUrlWithDates = getApiUrlWithDates(localStartDate.plusDays(maxDaysDataRange * i), localStartDate.plusDays(maxDaysDataRange * (i + 1) - 1));

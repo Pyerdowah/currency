@@ -61,4 +61,8 @@ public class DateService {
         DayOfWeek day = DayOfWeek.of(localDate.get(ChronoField.DAY_OF_WEEK));
         return day == DayOfWeek.SUNDAY || day == DayOfWeek.SATURDAY;
     }
+
+    public boolean onlyTodayData() {
+        return (localStartDate.toString().equals(localEndDate.toString()) && localEndDate.toString().equals(today.toString()));
+    }
 }
