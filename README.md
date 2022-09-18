@@ -4,12 +4,12 @@ Description:
 
 Simple web appliaction that displays a dynamic table of data of USD currency from specified date range. Data is downnloaded from api: http://api.nbp.pl.
 
-Backend libraries:
+Backend(src folder) libraries:
 - Spring Boot
 - Lombok
 - JUnit
 
-Frontend libraries:
+Frontend(currencyFrontend folder) libraries:
 - Angular
 
 Ports:
