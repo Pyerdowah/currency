@@ -1,22 +1,29 @@
 <div class="modal-footer">
   <form>
     <div class="form-group">
-      <input type="date" id="startDate" name="startDate" value="2022-09-12" #startDate>
+      <label>Start date:</label>
+      <input type="date" id="startDate" name="startDate" value="{{weekAgoDate}}" #startDate>
     </div>
     <div class="form-group">
-      <input type="date" id="endDate" name="endDate" value="2022-09-18" #endDate>
+      <label>End date:  </label>
+      <input type="date" id="endDate" name="endDate" value="{{todayDate}}" #endDate>
     </div>
+    <p></p>
+    <p *ngIf="show" style="color: red"> {{errorMessage}}</p>
     <div class="modal-footer">
       <button type="submit" class="btn btn-primary" (click)="getData(startDate.value, endDate.value)">submit</button>
     </div>
   </form>
   <p></p>
-  <table *ngIf="show">
+  <table>
+    <tr>
+      <th colspan="4">Quotation of the USD buy and sell rate between the given date range with the difference in value (buy and sell) between the days.</th>
+    </tr>
     <tr>
       <th>Day</th>
       <th>Bid</th>
       <th>Ask</th>
-      <th>Diff</th>
+      <th>Difference</th>
     </tr>
     <tr *ngFor="let currency of currencyArray">
       <td >{{currency.dayDate}}</td>

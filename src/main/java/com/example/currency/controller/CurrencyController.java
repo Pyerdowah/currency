@@ -1,16 +1,12 @@
 package com.example.currency.controller;
 
 
-import com.example.currency.dto.CurrencyResponseDto;
 import com.example.currency.service.CurrencyService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 public class CurrencyController {
@@ -24,6 +20,6 @@ public class CurrencyController {
 
     @GetMapping("/getData/{startDate}/{endDate}")
     public ResponseEntity<?> getData(@PathVariable String startDate, @PathVariable String endDate) {
-        return currencyService.getData(startDate, endDate);
+        return currencyService.splitData(startDate, endDate);
     }
 }

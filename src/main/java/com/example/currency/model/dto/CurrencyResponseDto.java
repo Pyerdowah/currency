@@ -1,15 +1,13 @@
-package com.example.currency.dto;
+package com.example.currency.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-
-import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
+@ToString
 public class CurrencyResponseDto {
     private double bidValue;
     private double askValue;
