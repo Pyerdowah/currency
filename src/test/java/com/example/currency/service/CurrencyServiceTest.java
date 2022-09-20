@@ -19,19 +19,19 @@ public class CurrencyServiceTest {
         String[] startDateArray = new String[5];
         startDateArray[0] = "2022-09-10";
         startDateArray[1] = "2022-09-10";
-        startDateArray[2] = "2022-09-15";
+        startDateArray[2] = "2002-01-02";
         startDateArray[3] = "2022-09-18";
-        startDateArray[4] = "2022-09-15";
+        startDateArray[4] = "2000-01-01";
 
         String[] endDateArray = new String[5];
         endDateArray[0] = "2022-09-11";
         endDateArray[1] = "2022-09-11";
-        endDateArray[2] = "2022-09-16";
+        endDateArray[2] = "2002-01-03";
         endDateArray[3] = "2022-09-11";
-        endDateArray[4] = "2023-09-30";
+        endDateArray[4] = "2002-01-03";
 
-        CurrencyResponseDto currencyResponseDto = new CurrencyResponseDto(4.6738, 4.7682, "2022-09-15", -0.0944);
-        CurrencyResponseDto currencyResponseDto1 = new CurrencyResponseDto(4.6777, 4.7723, "2022-09-16", -0.0946);
+        CurrencyResponseDto currencyResponseDto = new CurrencyResponseDto(3.9451, 4.0249, "2002-01-02", -0.0798);
+        CurrencyResponseDto currencyResponseDto1 = new CurrencyResponseDto(3.8994, 3.9782, "2002-01-03", -0.0788);
         List<CurrencyResponseDto> currencyResponseDtoList = new ArrayList<>();
         currencyResponseDtoList.add(currencyResponseDto);
         currencyResponseDtoList.add(currencyResponseDto1);
